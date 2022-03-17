@@ -33,7 +33,7 @@ type (
 		EnableCache     bool     // Whether to enable kaniko cache
 		CacheDir		string   // Set this flag to specify a local directory cache for base images. Defaults to /cache.
 		CacheCopyLayers	bool	 // Set this flag to cache copy layers. Defaults to false
-		CacheCompress	bool	 // Set this to false in order to prevent tar compression for cached layers. Defaults to true.
+		CacheNoCompress	bool	 // Set this to true in order to prevent tar compression for cached layers. Defaults to false.
 		CacheRepo       string   // Remote repository that will be used to store cached layers
 		CacheTTL        int      // Cache timeout in hours
 		DigestFile      string   // Digest file location
