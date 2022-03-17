@@ -149,7 +149,7 @@ func main() {
 		cli.StringFlag{
 			Name:   "cache-dir",
 			Usage:  "Set this flag to specify a local directory cache for base images. enable-cache needs to be set to use this flag. Defaults to /cache.",
-			Value: 	"/cache"
+			Value: 	"/cache",
 			EnvVar: "PLUGIN_CACHE_DIR",
 		},
 		cli.BoolFlag{
