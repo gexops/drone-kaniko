@@ -7,8 +7,8 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/drone/drone-kaniko/pkg/artifact"
-	"github.com/drone/drone-kaniko/pkg/tagger"
+	"github.com/gexops/drone-kaniko/pkg/artifact"
+	"github.com/gexops/drone-kaniko/pkg/tagger"
 	"golang.org/x/mod/semver"
 )
 
@@ -198,7 +198,7 @@ func (p Plugin) Exec() error {
 		if p.Build.CacheCopyLayers {
 			cmdArgs = append(cmdArgs, "--cache-copy-layers")
 		}
-		
+
 		if p.Build.CacheNoCompress {
 			cmdArgs = append(cmdArgs, "--compressed-caching=false")
 		}

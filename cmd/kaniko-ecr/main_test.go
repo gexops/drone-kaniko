@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/drone/drone-kaniko/pkg/docker"
+	"github.com/gexops/drone-kaniko/pkg/docker"
 )
 
 func TestCreateDockerConfig(t *testing.T) {

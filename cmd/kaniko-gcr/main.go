@@ -10,8 +10,8 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 
-	kaniko "github.com/drone/drone-kaniko"
-	"github.com/drone/drone-kaniko/pkg/artifact"
+	kaniko "github.com/gexops/drone-kaniko"
+	"github.com/gexops/drone-kaniko/pkg/artifact"
 )
 
 const (
