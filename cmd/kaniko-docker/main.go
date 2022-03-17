@@ -155,14 +155,12 @@ func main() {
 		cli.BoolFlag{
 			Name:   "cache-copy-layers",
 			Usage:  "Set this flag to cache copy layers. Defaults to false",
-			Value: 	false,
 			EnvVar: "PLUGIN_CACHE_COPY_LAYERS",
 		},
 		cli.BoolFlag{
-			Name:   "cache-compress",
-			Usage:  "Set this to false in order to prevent tar compression for cached layers. Defaults to true.",
-			Value: 	true,
-			EnvVar: "PLUGIN_CACHE_COMPRESS",
+			Name:   "cache-no-compress",
+			Usage:  "Set this to true in order to prevent tar compression for cached layers.",
+			EnvVar: "PLUGIN_CACHE_NO_COMPRESS",
 		},
 		cli.StringFlag{
 			Name:   "cache-repo",
@@ -232,7 +230,7 @@ func run(c *cli.Context) error {
 			EnableCache:     c.Bool("enable-cache"),
 			CacheDir:		 c.String("cache-dir"),
 			CacheCopyLayers: c.Bool("cache-copy-layers"),
-			CacheCompress:   c.Bool("cache-compress"),
+			CacheNoCompress: c.Bool("cache-no-compress"),
 			CacheRepo:       buildRepo(c.String("registry"), c.String("cache-repo")),
 			CacheTTL:        c.Int("cache-ttl"),
 			DigestFile:      defaultDigestFile,
