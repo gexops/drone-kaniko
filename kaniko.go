@@ -31,6 +31,9 @@ type (
 		SkipTlsVerify   bool     // Docker skip tls certificate verify for registry
 		SnapshotMode    string   // Kaniko snapshot mode
 		EnableCache     bool     // Whether to enable kaniko cache
+		CacheDir		string   // Set this flag to specify a local directory cache for base images. Defaults to /cache.
+		CacheCopyLayers	bool	 // Set this flag to cache copy layers. Defaults to false
+		CacheCompress	bool	 // Set this to false in order to prevent tar compression for cached layers. Defaults to true.
 		CacheRepo       string   // Remote repository that will be used to store cached layers
 		CacheTTL        int      // Cache timeout in hours
 		DigestFile      string   // Digest file location
@@ -185,7 +188,20 @@ func (p Plugin) Exec() error {
 		if p.Build.CacheRepo != "" {
 			cmdArgs = append(cmdArgs, fmt.Sprintf("--cache-repo=%s", p.Build.CacheRepo))
 		}
+		
+		if p.Build.CacheDir != "" {
+			if _, err := os.Stat(p.Build.CacheDir); !os.IsNotExist(err) {
+				cmdArgs = append(cmdArgs, fmt.Sprintf("--cache-dir=%s", p.Build.CacheDir))
+			}
+		}
+		
+		if p.Build.CacheCopyLayers {
+			cmdArgs = append(cmdArgs, "--cache-copy-layers")
+		}
+
+		cmdArgs = append(cmdArgs, fmt.Sprintf("--compressed-caching=%s", p.Build.CacheCompress))
 	}
+	
 
 	if p.Build.CacheTTL != 0 {
 		cmdArgs = append(cmdArgs, fmt.Sprintf("--cache-ttl=%dh", p.Build.CacheTTL))

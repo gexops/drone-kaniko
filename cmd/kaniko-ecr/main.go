@@ -175,6 +175,24 @@ func main() {
 			EnvVar: "PLUGIN_ENABLE_CACHE",
 		},
 		cli.StringFlag{
+			Name:   "cache-dir",
+			Usage:  "Set this flag to specify a local directory cache for base images. enable-cache needs to be set to use this flag. Defaults to /cache.",
+			Value: 	"/cache"
+			EnvVar: "PLUGIN_CACHE_DIR",
+		},
+		cli.BoolFlag{
+			Name:   "cache-copy-layers",
+			Usage:  "Set this flag to cache copy layers. Defaults to false",
+			Value: 	false,
+			EnvVar: "PLUGIN_CACHE_COPY_LAYERS",
+		},
+		cli.BoolFlag{
+			Name:   "cache-compress",
+			Usage:  "Set this to false in order to prevent tar compression for cached layers. Defaults to true.",
+			Value: 	true,
+			EnvVar: "PLUGIN_CACHE_COMPRESS",
+		},
+		cli.StringFlag{
 			Name:   "cache-repo",
 			Usage:  "Remote repository that will be used to store cached layers. Cache repo should be present in specified registry. enable-cache needs to be set to use this flag",
 			EnvVar: "PLUGIN_CACHE_REPO",
@@ -282,6 +300,9 @@ func run(c *cli.Context) error {
 			Labels:          c.StringSlice("custom-labels"),
 			SnapshotMode:    c.String("snapshot-mode"),
 			EnableCache:     c.Bool("enable-cache"),
+			CacheDir:		 c.String("cache-dir"),
+			CacheCopyLayers: c.Bool("cache-copy-layers"),
+			CacheCompress:   c.Bool("cache-compress"),
 			CacheRepo:       fmt.Sprintf("%s/%s", c.String("registry"), c.String("cache-repo")),
 			CacheTTL:        c.Int("cache-ttl"),
 			DigestFile:      defaultDigestFile,
