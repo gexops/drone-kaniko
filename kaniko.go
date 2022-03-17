@@ -198,8 +198,10 @@ func (p Plugin) Exec() error {
 		if p.Build.CacheCopyLayers {
 			cmdArgs = append(cmdArgs, "--cache-copy-layers")
 		}
-
-		cmdArgs = append(cmdArgs, fmt.Sprintf("--compressed-caching=%s", p.Build.CacheCompress))
+		
+		if p.Build.CacheNoCompress {
+			cmdArgs = append(cmdArgs, "--compressed-caching=false")
+		}
 	}
 	
 

@@ -1,4 +1,4 @@
-module github.com/drone/drone-kaniko
+module github.com/gexops/drone-kaniko
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.8.1
