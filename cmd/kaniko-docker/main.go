@@ -139,7 +139,7 @@ func main() {
 		cli.StringFlag{
 			Name:   "snapshot-mode",
 			Usage:  "Specify one of full, redo or time as snapshot mode",
-			Value: 	"redo"
+			Value: 	"redo",
 			EnvVar: "PLUGIN_SNAPSHOT_MODE",
 		},
 		cli.BoolFlag{
