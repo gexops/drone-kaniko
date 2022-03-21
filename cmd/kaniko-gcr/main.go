@@ -171,6 +171,11 @@ func main() {
 			Usage:  "Set this flag as --verbosity=<panic|fatal|error|warn|info|debug|trace> to set the logging level for kaniko. Defaults to info.",
 			EnvVar: "PLUGIN_VERBOSITY",
 		},
+		cli.BoolFlag{
+			Name:   "use-new-run",
+			Usage:  "Set this flag if experimental run implementation for detecting changes without requiring file system snapshots. In some cases, this may improve build performance by 75%",
+			EnvVar: "PLUGIN_USE_NEW_RUN",
+		},
 		cli.StringFlag{
 			Name:   "platform",
 			Usage:  "Allows to build with another default platform than the host, similarly to docker build --platform",
@@ -221,6 +226,7 @@ func run(c *cli.Context) error {
 			DigestFile:      defaultDigestFile,
 			NoPush:          noPush,
 			Verbosity:       c.String("verbosity"),
+			UseNewRun: 		 c.Bool("use-new-run"),
 			Platform:        c.String("platform"),
 		},
 		Artifact: kaniko.Artifact{

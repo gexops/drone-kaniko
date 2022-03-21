@@ -139,6 +139,7 @@ func main() {
 		cli.StringFlag{
 			Name:   "snapshot-mode",
 			Usage:  "Specify one of full, redo or time as snapshot mode",
+			Value: 	"redo"
 			EnvVar: "PLUGIN_SNAPSHOT_MODE",
 		},
 		cli.BoolFlag{
@@ -186,6 +187,11 @@ func main() {
 			Name:   "verbosity",
 			Usage:  "Set this flag with value as oneof <panic|fatal|error|warn|info|debug|trace> to set the logging level for kaniko. Defaults to info.",
 			EnvVar: "PLUGIN_VERBOSITY",
+		},
+		cli.BoolFlag{
+			Name:   "use-new-run",
+			Usage:  "Set this flag if experimental run implementation for detecting changes without requiring file system snapshots. In some cases, this may improve build performance by 75%",
+			EnvVar: "PLUGIN_USE_NEW_RUN",
 		},
 		cli.StringFlag{
 			Name:   "platform",
@@ -236,6 +242,7 @@ func run(c *cli.Context) error {
 			DigestFile:      defaultDigestFile,
 			NoPush:          noPush,
 			Verbosity:       c.String("verbosity"),
+			UseNewRun: 		 c.Bool("use-new-run"),	
 			Platform:        c.String("platform"),
 		},
 		Artifact: kaniko.Artifact{

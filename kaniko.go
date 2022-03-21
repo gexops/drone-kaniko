@@ -39,6 +39,7 @@ type (
 		DigestFile      string   // Digest file location
 		NoPush          bool     // Set this flag if you only want to build the image, without pushing to a registry
 		Verbosity       string   // Log level
+		UseNewRun 		bool 	 // experimental run implementation for detecting changes without requiring file system snapshots. In some cases, this may improve build performance by 75%
 		Platform        string   // Allows to build with another default platform than the host, similarly to docker build --platform
 	}
 
@@ -219,6 +220,10 @@ func (p Plugin) Exec() error {
 
 	if p.Build.Verbosity != "" {
 		cmdArgs = append(cmdArgs, fmt.Sprintf("--verbosity=%s", p.Build.Verbosity))
+	}
+
+	if p.Build.UseNewRun {
+		cmdArgs = append(cmdArgs, "--use-new-run")
 	}
 
 	if p.Build.Platform != "" {
